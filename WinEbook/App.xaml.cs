@@ -78,6 +78,43 @@ namespace WinEbook
             Window.Current.Activate();
         }
 
+        protected override void OnFileActivated(FileActivatedEventArgs args)
+        {
+            // Create a Frame to act as the navigation context and associate it with
+            // a SuspensionManager key
+            var rootFrame = new Frame();
+
+            // Do not repeat app initialization when already running, just ensure that
+            // the window is active
+            if (args.PreviousExecutionState == ApplicationExecutionState.Running)
+            {
+                if (Window.Current.GetType() == typeof(OpenFilePage))
+                {
+                    Window.Current.Activate();
+                    return;
+                }
+
+                rootFrame = (Frame) Window.Current.Content;
+            }
+
+            if (rootFrame.Content == null)
+            {
+                // When the navigation stack isn't restored navigate to the first page,
+                // configuring the new page by passing required information as a navigation
+                // parameter
+                if (!rootFrame.Navigate(typeof(OpenFilePage), args))
+                {
+                    throw new Exception("Failed to create initial page");
+                }
+            }
+
+            // Place the frame in the current Window and ensure that it is active
+            Window.Current.Content = rootFrame;
+            Window.Current.Activate();
+
+            base.OnFileActivated(args);
+        }
+
         /// <summary>
         /// Invoked when application execution is being suspended.  Application state is saved
         /// without knowing whether the application will be terminated or resumed with the contents
