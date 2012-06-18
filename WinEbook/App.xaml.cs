@@ -90,8 +90,7 @@ namespace WinEbook
             {
                 if (Window.Current.GetType() == typeof(OpenFilePage))
                 {
-                    Window.Current.Activate();
-                    return;
+                    Window.Current.Close();
                 }
 
                 rootFrame = (Frame) Window.Current.Content;

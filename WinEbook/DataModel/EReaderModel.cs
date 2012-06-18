@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using Windows.UI.Xaml.Data;
+using Windows.ApplicationModel.Activation;
 
 namespace WinEbook.Data
 {
@@ -29,9 +30,9 @@ namespace WinEbook.Data
             }
         }
 
-        public EBook(string bookPath)
+        public EBook(FileActivatedEventArgs bookPath)
         {
-            _path = bookPath;
+            _path = bookPath.Files[0].Path;
         }
     }
 

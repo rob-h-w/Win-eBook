@@ -11,6 +11,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.ApplicationModel.Activation;
 using WinEbook.Data;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
@@ -38,7 +39,10 @@ namespace WinEbook
         /// session.  This will be null the first time a page is visited.</param>
         protected override void LoadState(Object navigationParameter, Dictionary<String, Object> pageState)
         {
-            this.DefaultViewModel["CurrentBook"] = EReaderModel.Model.CurrentBook;
+            FileActivatedEventArgs fileArgs = (FileActivatedEventArgs)navigationParameter;
+            EBook book = new EBook(fileArgs);
+            EReaderModel.Model.CurrentBook = book;
+            this.DefaultViewModel["Path"] = EReaderModel.Model.CurrentBook.Path;
         }
 
         /// <summary>
