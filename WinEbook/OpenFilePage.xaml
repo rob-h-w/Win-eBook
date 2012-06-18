@@ -34,6 +34,7 @@
             <Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>
             <TextBlock x:Name="pageTitle" Grid.Column="1" Text="{StaticResource AppName}" Style="{StaticResource PageHeaderTextStyle}"/>
         </Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="53.731,10,0,0" Grid.Row="1" Style="{StaticResource HeaderTextStyle}" TextWrapping="Wrap" Text="Open or add to Library" VerticalAlignment="Top"/>
 
         <VisualStateManager.VisualStateGroups>
 
