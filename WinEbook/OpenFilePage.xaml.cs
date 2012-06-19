@@ -41,8 +41,8 @@ namespace WinEbook
         {
             FileActivatedEventArgs fileArgs = (FileActivatedEventArgs)navigationParameter;
             EBook book = new EBook(fileArgs);
-            EReaderModel.Model.CurrentBook = book;
-            this.DefaultViewModel["Path"] = EReaderModel.Model.CurrentBook.Path;
+            EReaderModel.CurrentBook = book;
+            this.DefaultViewModel["Path"] = EReaderModel.CurrentBook.Path;
         }
 
         /// <summary>

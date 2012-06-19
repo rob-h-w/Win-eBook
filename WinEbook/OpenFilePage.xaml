@@ -8,9 +8,11 @@
     xmlns:Data="using:WinEbook.Data"
     x:Name="pageRoot"
     x:Class="WinEbook.OpenFilePage"
-    DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Mode=Self}}"
     IsTabStop="false"
     mc:Ignorable="d">
+	<common:LayoutAwarePage.DataContext>
+		<Data:EReaderModel/>
+	</common:LayoutAwarePage.DataContext>
 
     <!--
         This grid acts as a root panel for the page that defines two rows:
@@ -21,8 +23,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="140"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <VisualStateManager.VisualStateGroups>
@@ -70,12 +71,12 @@
             <Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>
             <TextBlock x:Name="pageTitle" Grid.Column="1" Text="{StaticResource AppName}" Style="{StaticResource PageHeaderTextStyle}"/>
         </Grid>
-        <TextBlock TextWrapping="Wrap" Text="{Binding Path}" VerticalAlignment="Stretch" Style="{StaticResource PageSubheaderTextStyle}" Grid.Row="1" Grid.Column="6" Margin="0,0,0,10" Padding="116,0,0,0">
+        <TextBlock TextWrapping="Wrap" VerticalAlignment="Stretch" Style="{StaticResource PageSubheaderTextStyle}" Grid.Row="1" Grid.Column="6" Margin="0,0,0,10" Padding="116,0,0,0" Text="{Binding CurrentBook.Path, Mode=OneTime}">
         	<TextBlock.RenderTransform>
         		<CompositeTransform/>
         	</TextBlock.RenderTransform>
         </TextBlock>
-        <Grid x:Name="Buttons" Grid.Row="2" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="116,0,0,0">
+        <Grid x:Name="Buttons" Grid.Row="2" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="116,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
         	<Grid.ColumnDefinitions>
         		<ColumnDefinition Width="*"/>
         		<ColumnDefinition Width="*"/>
@@ -83,8 +84,8 @@
         	<Grid.RowDefinitions>
         		<RowDefinition/>
         	</Grid.RowDefinitions>
-        	<Button x:Name="OpenButton" Content="Open for reading" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,5,0"/>
-        	<Button x:Name="AddToLibraryButton" Content="Add to Library" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" Margin="5,0,0,0"/>
+        	<Button x:Name="OpenButton" Content="Open for reading" HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="0"/>
+        	<Button x:Name="AddToLibraryButton" Content="Add to Library" HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.Column="1" Margin="0"/>
         </Grid>
 
     </Grid>
