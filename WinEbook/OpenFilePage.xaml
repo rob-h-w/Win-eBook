@@ -20,6 +20,7 @@
     <Grid Style="{StaticResource LayoutRootStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="140"/>
+            <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -27,6 +28,12 @@
 
             <!-- Visual states reflect the application's view state -->
             <VisualStateGroup x:Name="ApplicationViewStates">
+            	<VisualStateGroup.Transitions>
+            		<VisualTransition GeneratedDuration="0" To="FullScreenLandscape"/>
+            		<VisualTransition GeneratedDuration="0" To="Filled"/>
+            		<VisualTransition GeneratedDuration="0" To="FullScreenPortrait"/>
+            		<VisualTransition GeneratedDuration="0" To="Snapped"/>
+            	</VisualStateGroup.Transitions>
         		<VisualState x:Name="FullScreenLandscape"/>
         		<VisualState x:Name="Filled"/>
 
@@ -48,7 +55,6 @@
         				<ObjectAnimationUsingKeyFrames Storyboard.TargetName="pageTitle" Storyboard.TargetProperty="Style">
         					<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource SnappedPageHeaderTextStyle}"/>
         				</ObjectAnimationUsingKeyFrames>
-        				<DoubleAnimation Duration="0" To="26.667" Storyboard.TargetProperty="(TextBlock.FontSize)" Storyboard.TargetName="textBlock" d:IsOptimized="True"/>
         			</Storyboard>
         		</VisualState>
         	</VisualStateGroup>
@@ -63,7 +69,7 @@
             <Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>
             <TextBlock x:Name="pageTitle" Grid.Column="1" Text="{StaticResource AppName}" Style="{StaticResource PageHeaderTextStyle}"/>
         </Grid>
-        <TextBlock x:Name="textBlock" Grid.Row="1" Style="{StaticResource HeaderTextStyle}" TextWrapping="NoWrap" Text="{Binding Path}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40" MinWidth="10" MinHeight="40" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Path}" VerticalAlignment="Top" Style="{StaticResource PageHeaderTextStyle}" Grid.Row="1" Grid.Column="6" Margin="36,0,36,36"/>
 
     </Grid>
 </common:LayoutAwarePage>

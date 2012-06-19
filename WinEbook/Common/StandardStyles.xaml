@@ -586,6 +586,11 @@
         <Setter Property="TextWrapping" Value="NoWrap"/>
         <Setter Property="VerticalAlignment" Value="Bottom"/>
         <Setter Property="Margin" Value="0,0,30,40"/>
+        <Setter Property="RenderTransform">
+        	<Setter.Value>
+        		<CompositeTransform TranslateX="0" TranslateY="0"/>
+        	</Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="PageSubheaderTextStyle" TargetType="TextBlock" BasedOn="{StaticResource SubheaderTextStyle}">
