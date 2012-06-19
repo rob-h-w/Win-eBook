@@ -82,29 +82,38 @@ namespace WinEbook
         {
             // Create a Frame to act as the navigation context and associate it with
             // a SuspensionManager key
-            var rootFrame = new Frame();
+            Frame rootFrame = null;
 
             // Do not repeat app initialization when already running, just ensure that
             // the window is active
             if (args.PreviousExecutionState == ApplicationExecutionState.Running)
             {
-                if (Window.Current.GetType() == typeof(OpenFilePage))
+                Frame currentFrame = (Frame)Window.Current.Content;
+                if (currentFrame.CurrentSourcePageType == typeof(OpenFilePage))
                 {
-                    Window.Current.Close();
+                    if (currentFrame.CanGoBack)
+                    {
+                        currentFrame.GoBack();
+                    }
+                    else
+                    {
+                        currentFrame = new Frame();
+                    }
                 }
-
-                rootFrame = (Frame) Window.Current.Content;
+                
+                rootFrame = currentFrame;
             }
 
-            if (rootFrame.Content == null)
+            // Ensure we have a root frame.
+            if (rootFrame == null)
             {
-                // When the navigation stack isn't restored navigate to the first page,
-                // configuring the new page by passing required information as a navigation
-                // parameter
-                if (!rootFrame.Navigate(typeof(OpenFilePage), args))
-                {
-                    throw new Exception("Failed to create initial page");
-                }
+                rootFrame = new Frame();
+            }
+
+            // Ensure we have content.
+            if (!rootFrame.Navigate(typeof(OpenFilePage), args))
+            {
+                throw new Exception("Failed to create open file page!");
             }
 
             // Place the frame in the current Window and ensure that it is active
