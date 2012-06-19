@@ -17,11 +17,12 @@
         * Row 0 contains the back button and page title
         * Row 1 contains the rest of the page layout
     -->
-    <Grid Style="{StaticResource LayoutRootStyle}">
+    <Grid x:Name="RootLayout" Style="{StaticResource LayoutRootStyle}" Height="{Binding ActualHeight, ElementName=pageRoot, Mode=OneWay}">
         <Grid.RowDefinitions>
             <RowDefinition Height="140"/>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
         <VisualStateManager.VisualStateGroups>
@@ -61,7 +62,7 @@
         </VisualStateManager.VisualStateGroups>
 
         <!-- Back button and page title -->
-        <Grid>
+        <Grid x:Name="TitleBar">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
@@ -69,7 +70,22 @@
             <Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>
             <TextBlock x:Name="pageTitle" Grid.Column="1" Text="{StaticResource AppName}" Style="{StaticResource PageHeaderTextStyle}"/>
         </Grid>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Path}" VerticalAlignment="Top" Style="{StaticResource PageHeaderTextStyle}" Grid.Row="1" Grid.Column="6" Margin="36,0,36,36"/>
+        <TextBlock TextWrapping="Wrap" Text="{Binding Path}" VerticalAlignment="Stretch" Style="{StaticResource PageSubheaderTextStyle}" Grid.Row="1" Grid.Column="6" Margin="0,0,0,10" Padding="116,0,0,0">
+        	<TextBlock.RenderTransform>
+        		<CompositeTransform/>
+        	</TextBlock.RenderTransform>
+        </TextBlock>
+        <Grid x:Name="Buttons" Grid.Row="2" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="116,0,0,0">
+        	<Grid.ColumnDefinitions>
+        		<ColumnDefinition Width="*"/>
+        		<ColumnDefinition Width="*"/>
+        	</Grid.ColumnDefinitions>
+        	<Grid.RowDefinitions>
+        		<RowDefinition/>
+        	</Grid.RowDefinitions>
+        	<Button x:Name="OpenButton" Content="Open for reading" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,5,0"/>
+        	<Button x:Name="AddToLibraryButton" Content="Add to Library" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" Margin="5,0,0,0"/>
+        </Grid>
 
     </Grid>
 </common:LayoutAwarePage>
