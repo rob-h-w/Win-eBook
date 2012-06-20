@@ -5,7 +5,7 @@
     xmlns:common="using:WinEbook.Common"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:Data="using:WinEbook.Data"
+    xmlns:Data="using:WinEbook.DataModel"
     x:Name="pageRoot"
     x:Class="WinEbook.OpenFilePage"
     IsTabStop="false"

@@ -1,9 +1,5 @@
-﻿namespace WinEbook.Data
+﻿namespace WinEbook.DataModel
 {
-    public sealed class Library
-    {
-    }
-
     public sealed class EReaderModel
     {
         private static EReaderModel _model = new EReaderModel();

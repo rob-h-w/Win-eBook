@@ -5,7 +5,7 @@ using Windows.Storage;
 using System.Globalization;
 using EBookData;
 
-namespace WinEbook.Data
+namespace WinEbook.DataModel
 {
     public sealed class EBook : WinEbook.Common.BindableBase, IBook
     {

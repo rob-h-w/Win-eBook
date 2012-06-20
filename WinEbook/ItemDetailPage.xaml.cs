@@ -1,4 +1,4 @@
-﻿using WinEbook.Data;
+﻿using WinEbook.DataModel;
 
 using System;
 using System.Collections.Generic;
