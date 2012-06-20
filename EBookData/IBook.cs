@@ -9,9 +9,9 @@ namespace EBookData
     public interface IBook
     {
         string Author { get; }
-        IChapter [] Chapters { get; }
+        List<IChapter> Chapters { get; }
         ICover Cover { get; }
-        string ISBN { get; }
+        string Identifier { get; } // ISBN
         string Language { get; }
         string Path { get; }
         DateTime PublicationDate { get; }
