@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace EBookData
 {
@@ -9,11 +10,10 @@ namespace EBookData
         List<IChapter> Chapters { get; }
         ICover Cover { get; }
         string Identifier { get; } // ISBN
-        string Language { get; }
-        string Path { get; }
+        CultureInfo Language { get; }
+        string Legal { get; }
         DateTime PublicationDate { get; }
         string Publisher { get; }
-        string Legal { get; }
         string Title { get; }
     }
 }

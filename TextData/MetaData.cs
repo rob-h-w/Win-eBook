@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Text;
+using System.Xml.Linq;
 
 namespace TextData
 {
@@ -8,7 +9,7 @@ namespace TextData
     {
         protected override EBookData.MetaData.RequiredDataFormat Format
         {
-            get { return RequiredDataFormat.Text; }
+            get { return RequiredDataFormat.Lines; }
         }
 
         protected override Windows.Storage.Streams.UnicodeEncoding Encoding
@@ -44,7 +45,28 @@ namespace TextData
 
         protected override EBookData.IBook Load(IList<string> lines)
         {
-            throw new NotImplementedException();
+            Book book = new Book();
+            List<EBookData.IChapter> chapters = new List<EBookData.IChapter>(1);
+
+            Chapter chapter = new Chapter();
+            StringBuilder content = new StringBuilder();
+            foreach (string line in lines)
+            {
+                content.Append(line);
+                content.Append("<br />");
+            }
+
+            XDocument doc = new XDocument(
+                new XElement("html",
+                    new XElement("head",
+                        new XElement("title")),
+                    new XElement("body", content.ToString())));
+
+            chapter.Content = doc;
+
+            chapters.Add(chapter);
+            book.Chapters = chapters;
+            return book;
         }
 
         protected override EBookData.IBook Load(string text)

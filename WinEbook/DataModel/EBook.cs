@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using Windows.ApplicationModel.Activation;
 using Windows.Storage;
+using System.Globalization;
 using EBookData;
 
 namespace WinEbook.Data
 {
     public sealed class EBook : WinEbook.Common.BindableBase, IBook
     {
-        private string _path;
+        string _path;
         public string Path
         {
             get { return _path; }
@@ -17,107 +18,84 @@ namespace WinEbook.Data
 
         public bool InLibrary { get; set; }
 
-        private string _title;
+        string _author;
+        public string Author
+        {
+            get { return _author; }
+            set { SetProperty<string>(ref _author, value, "Author"); }
+        }
+
+        List<IChapter> _chapters;
+        public List<IChapter> Chapters
+        {
+            get { return _chapters; }
+            set { SetProperty<List<IChapter>>(ref _chapters, value, "Chapters"); }
+        }
+
+        ICover _cover;
+        public ICover Cover
+        {
+            get { return _cover; }
+            set { SetProperty<ICover>(ref _cover, value, "Cover"); }
+        }
+
+        string _identifier;
+        public string Identifier
+        {
+            get { return _identifier; }
+            set { SetProperty<string>(ref _identifier, value, "Identifier"); }
+        }
+
+        CultureInfo _language;
+        public CultureInfo Language
+        {
+            get { return _language; }
+            set { SetProperty<CultureInfo>(ref _language, value, "Language"); }
+        }
+
+        string _legal;
+        public string Legal
+        {
+            get { return _legal; }
+            set { SetProperty<string>(ref _legal, value, "Legal"); }
+        }
+
+        DateTime _publicationDate;
+        public DateTime PublicationDate
+        {
+            get { return _publicationDate; }
+            set { SetProperty<DateTime>(ref _publicationDate, value, "PublicationDate"); }
+        }
+
+        string _publisher;
+        public string Publisher
+        {
+            get { return _publisher; }
+            set { SetProperty<string>(ref _publisher, value, "Publisher"); }
+        }
+
+        string _title;
         public string Title
         {
             get { return _title; }
             private set { SetProperty<string>(ref _title, value, "Title"); }
         }
 
-        public string Author
+        private void Copy(IBook other)
         {
-            get
+            if (this == other)
             {
-                throw new NotImplementedException();
+                return;
             }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
 
-        public List<EBookData.IChapter> Chapters
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public EBookData.ICover Cover
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public string Identifier
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public string Language
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public DateTime PublicationDate
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public string Publisher
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public string Legal
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            Author = other.Author;
+            Chapters = other.Chapters;
+            Cover = other.Cover;
+            Identifier = other.Identifier;
+            Language = other.Language;
+            Legal = other.Legal;
+            PublicationDate = other.PublicationDate;
+            Publisher = other.Publisher;
         }
 
         // Rob TODO: This should really be the result of querying the contents of a plugins folder.
@@ -134,6 +112,7 @@ namespace WinEbook.Data
                 if (await metaData.Supports(item))
                 {
                     IBook book = await metaData.Load(item);
+                    Copy(book);
                     break;
                 }
             }
