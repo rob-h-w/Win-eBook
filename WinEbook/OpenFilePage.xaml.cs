@@ -54,5 +54,15 @@ namespace WinEbook
         protected override void SaveState(Dictionary<String, Object> pageState)
         {
         }
+
+        private void OpenButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+        	// TODO: Add event handler implementation here.
+        }
+
+        private void AddToLibraryButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+        	// TODO: Add event handler implementation here.
+        }
     }
 }

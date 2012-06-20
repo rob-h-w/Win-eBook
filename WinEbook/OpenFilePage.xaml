@@ -19,11 +19,12 @@
         * Row 0 contains the back button and page title
         * Row 1 contains the rest of the page layout
     -->
-    <Grid x:Name="RootLayout" Style="{StaticResource LayoutRootStyle}" Height="{Binding ActualHeight, ElementName=pageRoot, Mode=OneWay}">
+    <Grid x:Name="RootLayout" Style="{StaticResource LayoutRootStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="140"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
         <VisualStateManager.VisualStateGroups>
@@ -57,6 +58,84 @@
         				<ObjectAnimationUsingKeyFrames Storyboard.TargetName="pageTitle" Storyboard.TargetProperty="Style">
         					<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource SnappedPageHeaderTextStyle}"/>
         				</ObjectAnimationUsingKeyFrames>
+        				<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Grid.Row)" Storyboard.TargetName="AddToLibraryButton">
+        					<DiscreteObjectKeyFrame KeyTime="0">
+        						<DiscreteObjectKeyFrame.Value>
+        							<x:Int32>1</x:Int32>
+        						</DiscreteObjectKeyFrame.Value>
+        					</DiscreteObjectKeyFrame>
+        				</ObjectAnimationUsingKeyFrames>
+        				<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Grid.Column)" Storyboard.TargetName="AddToLibraryButton">
+        					<DiscreteObjectKeyFrame KeyTime="0">
+        						<DiscreteObjectKeyFrame.Value>
+        							<x:Int32>0</x:Int32>
+        						</DiscreteObjectKeyFrame.Value>
+        					</DiscreteObjectKeyFrame>
+        				</ObjectAnimationUsingKeyFrames>
+        				<DoubleAnimation Duration="0" To="18.667" Storyboard.TargetProperty="(TextBlock.FontSize)" Storyboard.TargetName="textBlock" d:IsOptimized="True"/>
+        				<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Padding)" Storyboard.TargetName="textBlock">
+        					<DiscreteObjectKeyFrame KeyTime="0">
+        						<DiscreteObjectKeyFrame.Value>
+        							<Thickness>0</Thickness>
+        						</DiscreteObjectKeyFrame.Value>
+        					</DiscreteObjectKeyFrame>
+        				</ObjectAnimationUsingKeyFrames>
+        				<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="Buttons">
+        					<DiscreteObjectKeyFrame KeyTime="0">
+        						<DiscreteObjectKeyFrame.Value>
+        							<Thickness>0</Thickness>
+        						</DiscreteObjectKeyFrame.Value>
+        					</DiscreteObjectKeyFrame>
+        				</ObjectAnimationUsingKeyFrames>
+        				<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.HorizontalAlignment)" Storyboard.TargetName="Buttons">
+        					<DiscreteObjectKeyFrame KeyTime="0">
+        						<DiscreteObjectKeyFrame.Value>
+        							<HorizontalAlignment>Left</HorizontalAlignment>
+        						</DiscreteObjectKeyFrame.Value>
+        					</DiscreteObjectKeyFrame>
+        				</ObjectAnimationUsingKeyFrames>
+        				<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.VerticalAlignment)" Storyboard.TargetName="OpenButton">
+        					<DiscreteObjectKeyFrame KeyTime="0">
+        						<DiscreteObjectKeyFrame.Value>
+        							<VerticalAlignment>Top</VerticalAlignment>
+        						</DiscreteObjectKeyFrame.Value>
+        					</DiscreteObjectKeyFrame>
+        				</ObjectAnimationUsingKeyFrames>
+        				<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.HorizontalAlignment)" Storyboard.TargetName="OpenButton">
+        					<DiscreteObjectKeyFrame KeyTime="0">
+        						<DiscreteObjectKeyFrame.Value>
+        							<HorizontalAlignment>Stretch</HorizontalAlignment>
+        						</DiscreteObjectKeyFrame.Value>
+        					</DiscreteObjectKeyFrame>
+        				</ObjectAnimationUsingKeyFrames>
+        				<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.HorizontalAlignment)" Storyboard.TargetName="AddToLibraryButton">
+        					<DiscreteObjectKeyFrame KeyTime="0">
+        						<DiscreteObjectKeyFrame.Value>
+        							<HorizontalAlignment>Stretch</HorizontalAlignment>
+        						</DiscreteObjectKeyFrame.Value>
+        					</DiscreteObjectKeyFrame>
+        				</ObjectAnimationUsingKeyFrames>
+        				<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.VerticalAlignment)" Storyboard.TargetName="AddToLibraryButton">
+        					<DiscreteObjectKeyFrame KeyTime="0">
+        						<DiscreteObjectKeyFrame.Value>
+        							<VerticalAlignment>Top</VerticalAlignment>
+        						</DiscreteObjectKeyFrame.Value>
+        					</DiscreteObjectKeyFrame>
+        				</ObjectAnimationUsingKeyFrames>
+        				<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Grid.ColumnSpan)" Storyboard.TargetName="OpenButton">
+        					<DiscreteObjectKeyFrame KeyTime="0">
+        						<DiscreteObjectKeyFrame.Value>
+        							<x:Int32>2</x:Int32>
+        						</DiscreteObjectKeyFrame.Value>
+        					</DiscreteObjectKeyFrame>
+        				</ObjectAnimationUsingKeyFrames>
+        				<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Grid.ColumnSpan)" Storyboard.TargetName="AddToLibraryButton">
+        					<DiscreteObjectKeyFrame KeyTime="0">
+        						<DiscreteObjectKeyFrame.Value>
+        							<x:Int32>2</x:Int32>
+        						</DiscreteObjectKeyFrame.Value>
+        					</DiscreteObjectKeyFrame>
+        				</ObjectAnimationUsingKeyFrames>
         			</Storyboard>
         		</VisualState>
         	</VisualStateGroup>
@@ -71,7 +150,7 @@
             <Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>
             <TextBlock x:Name="pageTitle" Grid.Column="1" Text="{StaticResource AppName}" Style="{StaticResource PageHeaderTextStyle}"/>
         </Grid>
-        <TextBlock TextWrapping="Wrap" VerticalAlignment="Stretch" Style="{StaticResource PageSubheaderTextStyle}" Grid.Row="1" Grid.Column="6" Margin="0,0,0,10" Padding="116,0,0,0" Text="{Binding CurrentBook.Path, Mode=OneTime}">
+        <TextBlock x:Name="textBlock" TextWrapping="Wrap" VerticalAlignment="Stretch" Style="{StaticResource PageSubheaderTextStyle}" Grid.Row="1" Grid.Column="6" Margin="0,0,0,10" Text="{Binding CurrentBook.Path, Mode=OneTime}" Padding="116,0,0,0">
         	<TextBlock.RenderTransform>
         		<CompositeTransform/>
         	</TextBlock.RenderTransform>
@@ -83,9 +162,10 @@
         	</Grid.ColumnDefinitions>
         	<Grid.RowDefinitions>
         		<RowDefinition/>
+        		<RowDefinition/>
         	</Grid.RowDefinitions>
-        	<Button x:Name="OpenButton" Content="Open for reading" HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="0"/>
-        	<Button x:Name="AddToLibraryButton" Content="Add to Library" HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.Column="1" Margin="0"/>
+        	<Button x:Name="OpenButton" Content="Open for reading" HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="0" IsDoubleTapEnabled="False" IsRightTapEnabled="False" IsHoldingEnabled="False" Click="OpenButton_Click"/>
+        	<Button x:Name="AddToLibraryButton" Content="Add to Library" HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.Column="1" Margin="0" IsDoubleTapEnabled="False" IsHoldingEnabled="False" IsRightTapEnabled="False" Click="AddToLibraryButton_Click"/>
         </Grid>
 
     </Grid>
