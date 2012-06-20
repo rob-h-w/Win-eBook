@@ -57,7 +57,7 @@ namespace WinEbook
 
         private void OpenButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-        	// TODO: Add event handler implementation here.
+            Frame.Navigate(typeof(ReaderPage));
         }
 
         private void AddToLibraryButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)

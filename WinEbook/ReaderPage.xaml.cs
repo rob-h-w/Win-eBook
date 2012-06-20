@@ -33,6 +33,8 @@ namespace WinEbook
         /// property is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            string html = "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>\r\n" + DataModel.EReaderModel.CurrentBook.Chapters[0].Content.ToString();
+            EReaderView.NavigateToString(html);
         }
     }
 }

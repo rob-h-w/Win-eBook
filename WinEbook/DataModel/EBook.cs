@@ -104,18 +104,25 @@ namespace WinEbook.DataModel
         private static readonly MetaData[] _plugins = { new TextData.MetaData() };
         private async void Load(IStorageItem item)
         {
-            // The path doesn't need parsing.
-            Path = item.Path;
-
+            bool loaderFound = false;
             foreach (MetaData metaData in _plugins)
             {
                 if (await metaData.Supports(item))
                 {
                     IBook book = await metaData.Load(item);
                     Copy(book);
+                    loaderFound = true;
                     break;
                 }
             }
+
+            if (!loaderFound)
+            {
+                throw new PlatformNotSupportedException("Cannot open " + item.Path);
+            }
+
+            // The path doesn't need parsing.
+            Path = item.Path;
         }
 
         public EBook(FileActivatedEventArgs bookPath)

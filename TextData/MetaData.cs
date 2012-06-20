@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Xml.Linq;
 
 namespace TextData
@@ -49,18 +48,17 @@ namespace TextData
             List<EBookData.IChapter> chapters = new List<EBookData.IChapter>(1);
 
             Chapter chapter = new Chapter();
-            StringBuilder content = new StringBuilder();
+            XElement body = new XElement("body");
             foreach (string line in lines)
             {
-                content.Append(line);
-                content.Append("<br />");
+                body.Add(line);
+                body.Add(new XElement("br"));
             }
 
             XDocument doc = new XDocument(
+                new XDeclaration("1.0", "utf-8", "yes"),
                 new XElement("html",
-                    new XElement("head",
-                        new XElement("title")),
-                    new XElement("body", content.ToString())));
+                    body));
 
             chapter.Content = doc;
 
