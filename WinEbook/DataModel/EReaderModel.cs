@@ -5,37 +5,20 @@
         private static EReaderModel _model = new EReaderModel();
         private static EReaderModel Model
         {
-            get
-            {
-                return _model;
-            }
+            get { return _model; }
         }
 
         private Library _library = new Library();
         public static Library Library
         {
-            get
-            {
-                return Model._library;
-            }
+            get { return Model._library; }
         }
 
         private EBook _currentBook;
         public static EBook CurrentBook
         {
-            get
-            {
-                return Model._currentBook;
-            }
-            set
-            {
-                Model._currentBook = value;
-            }
-        }
-
-        public EReaderModel()
-        {
-            // TODO: parse the library contents.
+            get { return Model._currentBook; }
+            set { Model._currentBook = value; }
         }
     }
 }
