@@ -23,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE;NETFX_CORE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -104,6 +105,10 @@
     <ProjectReference Include="..\EBookData\EBookData.csproj">
       <Project>{d43ba9fb-33ac-4100-ac70-ce32a98a8a18}</Project>
       <Name>EBookData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TextData\TextData.csproj">
+      <Project>{aa049cfc-7279-4082-ba49-ade07790b548}</Project>
+      <Name>TextData</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

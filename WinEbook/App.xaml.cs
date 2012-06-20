@@ -100,7 +100,7 @@ namespace WinEbook
                         currentFrame = new Frame();
                     }
                 }
-                
+
                 rootFrame = currentFrame;
             }
 

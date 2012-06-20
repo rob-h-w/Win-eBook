@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;
+using Windows.Storage;
 using EBookData;
 
 namespace WinEbook.Data
@@ -122,9 +120,28 @@ namespace WinEbook.Data
             }
         }
 
+        // Rob TODO: This should really be the result of querying the contents of a plugins folder.
+        // Windows 8 appears to strenuously resist attempts to use the file system to load executable
+        // code. Solving this is beyond the scope of this project at the moment.
+        private static readonly MetaData[] _plugins = { new TextData.MetaData() };
+        private async void Load(IStorageItem item)
+        {
+            // The path doesn't need parsing.
+            Path = item.Path;
+
+            foreach (MetaData metaData in _plugins)
+            {
+                if (await metaData.Supports(item))
+                {
+                    IBook book = await metaData.Load(item);
+                    break;
+                }
+            }
+        }
+
         public EBook(FileActivatedEventArgs bookPath)
         {
-            Path = bookPath.Files[0].Path;
+            Load(bookPath.Files[0]);
         }
     }
 }

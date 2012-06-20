@@ -33,6 +33,7 @@
             <EditFlags OpenIsSafe="true" />
             <SupportedFileTypes>
               <FileType ContentType="application/epub+zip">.epub</FileType>
+              <FileType ContentType="text/plain">.txt</FileType>
             </SupportedFileTypes>
           </FileTypeAssociation>
         </Extension>

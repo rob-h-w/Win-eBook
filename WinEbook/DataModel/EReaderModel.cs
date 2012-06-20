@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
-using Windows.UI.Xaml.Data;
-
-namespace WinEbook.Data
+﻿namespace WinEbook.Data
 {
     public sealed class Library
     {
