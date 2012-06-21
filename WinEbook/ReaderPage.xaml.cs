@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Text;
+using System.Xml;
 using Windows.UI.Xaml.Navigation;
 using WinEbook.Common;
 
@@ -23,9 +25,20 @@ namespace WinEbook
         /// property is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            string html = "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>\r\n" + DataModel.EReaderModel.CurrentBook.Chapters[0].Content.ToString();
-            EReaderView.NavigateToString(html);
+            EReaderView.NavigateToString(DataModel.EReaderModel.CurrentBook.Chapters[0].Content.ToString());
             base.OnNavigatedTo(e);
+        }
+
+        private void EReaderView_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+        	// TODO: Add event handler implementation here.
+			// Go to the next page.
+        }
+
+        private void EReaderView_DoubleTapped(object sender, Windows.UI.Xaml.Input.DoubleTappedRoutedEventArgs e)
+        {
+        	// TODO: Add event handler implementation here.
+			// Go to the previous page.
         }
     }
 }
