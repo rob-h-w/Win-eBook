@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using WinEbook.DataModel;
 
 // The Grid App template is documented at http://go.microsoft.com/fwlink/?LinkId=234226
 
@@ -110,8 +111,11 @@ namespace WinEbook
                 rootFrame = new Frame();
             }
 
+            EBook book = new EBook(args);
+            EReaderModel.CurrentBook = book;
+
             // Ensure we have content.
-            if (!rootFrame.Navigate(typeof(OpenFilePage), args))
+            if (!rootFrame.Navigate(typeof(OpenFilePage)))
             {
                 throw new Exception("Failed to create open file page!");
             }
