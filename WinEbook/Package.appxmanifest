@@ -32,7 +32,6 @@
             <InfoTip>Electronic Publication File for eBooks</InfoTip>
             <EditFlags OpenIsSafe="true" />
             <SupportedFileTypes>
-              <FileType ContentType="application/epub+zip">.epub</FileType>
               <FileType ContentType="text/plain">.txt</FileType>
             </SupportedFileTypes>
           </FileTypeAssociation>
