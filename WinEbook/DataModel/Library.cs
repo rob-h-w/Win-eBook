@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WinEbook.DataModel
 {
-    public sealed class Library
+    public sealed class Library : WinEbook.Common.BindableBase
     {
     }
 }
