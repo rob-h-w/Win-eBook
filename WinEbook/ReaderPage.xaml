@@ -78,7 +78,8 @@
     			</VisualState>
     		</VisualStateGroup>
     	</VisualStateManager.VisualStateGroups>
-        <WebView x:Name="EReaderView" Tapped="EReaderView_Tapped" DoubleTapped="EReaderView_DoubleTapped" Grid.Row="1"/>
+        <WebView x:Name="EReaderView" Grid.Row="1" IsHoldingEnabled="False" IsRightTapEnabled="False" ScrollViewer.VerticalScrollBarVisibility="Disabled" ManipulationMode="None" LoadCompleted="EReaderView_LoadCompleted"/>
+        <Rectangle x:Name="WebViewBrushArea" Fill="#FFF4F4F5" Stroke="Black" Grid.Row="1" Tapped="WebViewBrushArea_Tapped"/>
         <Grid x:Name="BottomBar" Margin="0,0,20,4" Grid.Row="2">
         	<Grid.RowDefinitions>
         		<RowDefinition Height="Auto"/>
