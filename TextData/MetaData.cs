@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 
@@ -63,18 +64,28 @@ namespace TextData
                 foreach (string line in lines)
                 {
                     // Replace broken characters with '?'.
-                    string sanitizedLine = line;
-                    for (uint i = 0; i < 0x20; ++i)
+                    StringBuilder sanitizedLine = new StringBuilder(line);
+                    const uint mask = uint.MaxValue - 0x1F;
+                    for (int i = 0; i < line.Length; ++i)
                     {
-                        if (i == 0x9
-                            || i == 0xA
-                            || i == 0xD)
+                        char ch = line[i];
+                        // Characters in the range 0-0x1F are invalid.
+                        if ((ch & mask) == 0)
                         {
-                            continue;
+                            // With these exceptions.
+                            if (ch == 0x9
+                                || ch == 0xA
+                                || ch == 0xD)
+                            {
+                                continue;
+                            }
+
+                            // Replace the bad character.
+                            sanitizedLine[i] = '?';
                         }
-                        sanitizedLine = sanitizedLine.Replace((char)i, '?');
                     }
-                    writer.WriteString(sanitizedLine);
+
+                    writer.WriteString(sanitizedLine.ToString());
                     
                     writer.WriteStartElement("br");
                     writer.WriteEndElement();
