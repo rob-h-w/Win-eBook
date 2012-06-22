@@ -118,6 +118,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataModel\EBook.cs" />
+    <Compile Include="DataModel\Entry.cs" />
     <Compile Include="DataModel\EReaderModel.cs" />
     <Compile Include="DataModel\Library.cs" />
     <Compile Include="GroupedItemsPage.xaml.cs">
