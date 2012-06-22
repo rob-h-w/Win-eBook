@@ -40,5 +40,10 @@ namespace WinEbook
         	// TODO: Add event handler implementation here.
 			// Go to the previous page.
         }
+
+        private void Home_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            App.ResetStackToHome();
+        }
     }
 }

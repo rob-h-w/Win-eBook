@@ -140,5 +140,47 @@ namespace WinEbook
             await SuspensionManager.SaveAsync();
             deferral.Complete();
         }
+
+        public static void ResetStackToHome()
+        {
+            Frame currentFrame = (Frame)Window.Current.Content;
+            if (typeof(GroupedItemsPage) == currentFrame.CurrentSourcePageType
+                && !currentFrame.CanGoBack)
+            {
+                // Nothing to do; return.
+                return;
+            }
+
+            while (currentFrame.CanGoBack)
+            {
+                currentFrame.GoBack();
+            }
+
+            if (typeof(GroupedItemsPage) == currentFrame.CurrentSourcePageType)
+            {
+                // Done!
+                return;
+            }
+            else
+            {
+                currentFrame = new Frame();
+                SuspensionManager.RegisterFrame(currentFrame, "AppFrame");
+            }
+
+            if (currentFrame.Content == null)
+            {
+                // When the navigation stack isn't restored navigate to the first page,
+                // configuring the new page by passing required information as a navigation
+                // parameter
+                if (!currentFrame.Navigate(typeof(GroupedItemsPage), "AllGroups"))
+                {
+                    throw new Exception("Failed to create home page");
+                }
+            }
+
+            // Place the frame in the current Window and ensure that it is active
+            Window.Current.Content = currentFrame;
+            Window.Current.Activate();
+        }
     }
 }

@@ -41,7 +41,7 @@
         	</Grid.ColumnDefinitions>
         	<StackPanel Orientation="Horizontal">
         		<Button x:Name="Previous" Height="84" Style="{StaticResource PreviousAppBarButtonStyle}" VerticalAlignment="Top"/>
-        		<Button x:Name="Home" Height="84" Style="{StaticResource HomeAppBarButtonStyle}" VerticalAlignment="Top"/>
+        		<Button x:Name="Home" Height="84" Style="{StaticResource HomeAppBarButtonStyle}" VerticalAlignment="Top" Click="Home_Click"/>
         	</StackPanel>
         	<StackPanel Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
         		<Button x:Name="More" Height="84" Style="{StaticResource MoreAppBarButtonStyle}" VerticalAlignment="Top"/>
