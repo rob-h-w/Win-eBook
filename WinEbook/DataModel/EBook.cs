@@ -18,6 +18,7 @@ namespace WinEbook.DataModel
 
         public bool InLibrary { get; set; }
 
+        #region From IBook
         string _author;
         public string Author
         {
@@ -79,6 +80,14 @@ namespace WinEbook.DataModel
         {
             get { return _title; }
             private set { SetProperty<string>(ref _title, value, "Title"); }
+        }
+        #endregion
+
+        Entry _entry;
+        public Entry Entry
+        {
+            get { return _entry; }
+            set { SetProperty<Entry>(ref _entry, value, "Entry"); }
         }
 
         private void Copy(IBook other)
