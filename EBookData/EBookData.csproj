@@ -103,6 +103,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IBook.cs" />
+    <Compile Include="IBookMetaData.cs" />
     <Compile Include="IChapter.cs" />
     <Compile Include="ICover.cs" />
     <Compile Include="MetaData.cs" />

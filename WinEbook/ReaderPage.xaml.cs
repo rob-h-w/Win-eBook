@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Text;
 using System.Xml;
+using System.Xml.Linq;
+using EBookData;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using WinEbook.Common;
+using WinEbook.DataModel;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -24,6 +27,25 @@ namespace WinEbook
             WebViewBrushArea.Fill = _brush;
         }
 
+        private string Html()
+        {
+            Entry entry = EReaderModel.CurrentBook.Entry;
+            IChapter chapter = EReaderModel.CurrentBook.Chapters[entry.Chapter];
+            XDocument doc = chapter.Content;
+
+            // Get the body element.
+            XElement body = doc.Root.Element("body");
+            body.SetAttributeValue("style", String.Format("position:absolute; top: {0}px;", -entry.Offset));
+            return doc.ToString();
+        }
+
+        private void NextPage()
+        {
+            EReaderModel.CurrentBook.Entry.Offset += (int)WebViewBrushArea.ActualHeight;
+            EReaderView.Visibility = Windows.UI.Xaml.Visibility.Visible;
+            EReaderView.NavigateToString(Html());
+        }
+
         /// <summary>
         /// Invoked when this page is about to be displayed in a Frame.
         /// </summary>
@@ -31,7 +53,7 @@ namespace WinEbook
         /// property is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            EReaderView.NavigateToString(DataModel.EReaderModel.CurrentBook.Chapters[0].Content.ToString());
+            EReaderView.NavigateToString(Html());
             base.OnNavigatedTo(e);
         }
 
@@ -48,8 +70,12 @@ namespace WinEbook
 
         private void WebViewBrushArea_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            EReaderView.Visibility = Windows.UI.Xaml.Visibility.Visible;
-        	// TODO: Next page.
+            NextPage();
+        }
+
+        private void Next_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+        	NextPage();
         }
     }
 }

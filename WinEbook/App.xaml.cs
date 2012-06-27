@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using WinEbook.DataModel;
+using System.Threading.Tasks;
 
 // The Grid App template is documented at http://go.microsoft.com/fwlink/?LinkId=234226
 
@@ -111,8 +112,14 @@ namespace WinEbook
                 rootFrame = new Frame();
             }
 
-            EBook book = new EBook(args);
-            EReaderModel.CurrentBook = book;
+            Task<EBook> task = EBook.CreateEBook(args);
+            task.GetAwaiter().OnCompleted(() => {
+                EBook book = task.Result;
+                EReaderModel.CurrentBook = book;
+                if (EReaderModel.Library.Contains(book))
+                {
+                }
+            });
 
             // Ensure we have content.
             if (!rootFrame.Navigate(typeof(OpenFilePage)))

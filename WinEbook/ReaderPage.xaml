@@ -95,7 +95,7 @@
         	</StackPanel>
         	<StackPanel x:Name="stackPanel" Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
         		<Button x:Name="More" Height="84" Style="{StaticResource MoreAppBarButtonStyle}" VerticalAlignment="Top"/>
-        		<Button x:Name="Next" Height="84" Style="{StaticResource NextAppBarButtonStyle}" VerticalAlignment="Top"/>
+        		<Button x:Name="Next" Height="84" Style="{StaticResource NextAppBarButtonStyle}" VerticalAlignment="Top" Click="Next_Click"/>
         	</StackPanel>
         </Grid>
         <Grid x:Name="TopBar" Margin="0,0,20,4">

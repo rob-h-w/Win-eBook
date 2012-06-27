@@ -4,6 +4,7 @@ using Windows.ApplicationModel.Activation;
 using Windows.Storage;
 using System.Globalization;
 using EBookData;
+using System.Threading.Tasks;
 
 namespace WinEbook.DataModel
 {
@@ -111,7 +112,7 @@ namespace WinEbook.DataModel
         // Windows 8 appears to strenuously resist attempts to use the file system to load executable
         // code. Solving this is beyond the scope of this project at the moment.
         private static readonly MetaData[] _plugins = { new TextData.MetaData() };
-        private async void Load(IStorageItem item)
+        private async Task Load(IStorageItem item)
         {
             bool loaderFound = false;
             foreach (MetaData metaData in _plugins)
@@ -132,11 +133,21 @@ namespace WinEbook.DataModel
 
             // The path doesn't need parsing.
             Path = item.Path;
+            _entry = new Entry(this);
         }
 
-        public EBook(FileActivatedEventArgs bookPath)
+        private EBook() : base() { }
+
+        public static async Task<EBook> CreateEBook(IStorageItem item)
         {
-            Load(bookPath.Files[0]);
+            EBook returnValue = new EBook();
+            await returnValue.Load(item);
+            return returnValue;
+        }
+
+        public static async Task<EBook> CreateEBook(FileActivatedEventArgs fileActivatedEvent)
+        {
+            return await CreateEBook(fileActivatedEvent.Files[0]);
         }
     }
 }

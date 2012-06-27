@@ -1,5 +1,7 @@
 ﻿using System;
 using Windows.UI.Xaml;
+using EBookData;
+using WinEbook.DataModel;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
@@ -22,7 +24,8 @@ namespace WinEbook
 
         private void AddToLibraryButton_Click(object sender, RoutedEventArgs e)
         {
-        	// TODO: Add event handler implementation here.
+            EReaderModel.Library[EReaderModel.CurrentBook] = new Entry(EReaderModel.CurrentBook);
+            App.ResetStackToHome();
         }
     }
 }

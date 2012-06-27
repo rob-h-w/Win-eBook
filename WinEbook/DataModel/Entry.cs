@@ -1,21 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
+using System.Globalization;
+using EBookData;
 
 namespace WinEbook.DataModel
 {
-    public sealed class Entry : WinEbook.Common.BindableBase
+    public sealed class Entry : WinEbook.Common.BindableBase, IBookMetaData
     {
-        int _chapter;
+        int _chapter = 0;
         public int Chapter
         {
             get { return _chapter; }
             set { SetProperty<int>(ref _chapter, value, "Chapter"); }
         }
 
-        int _offset;
+        int _offset = 0;
         public int Offset
         {
             get { return _offset; }
@@ -29,11 +28,76 @@ namespace WinEbook.DataModel
             set { SetProperty<string>(ref _path, value, "Path"); }
         }
 
-        List<string> _groups;
-        public List<string> Groups
+        readonly ObservableCollection<string> _groups = new ObservableCollection<string>();
+        public ObservableCollection<string> Groups
         {
             get { return _groups; }
-            set { SetProperty<List<string>>(ref _groups, value, "Groups"); }
+        }
+
+        #region From IBookMetaData
+        string _author;
+        public string Author
+        {
+            get { return _author; }
+        }
+
+        ICover _cover;
+        public ICover Cover
+        {
+            get { return _cover; }
+        }
+
+        string _identifier;
+        public string Identifier
+        {
+            get { return _identifier; }
+        }
+
+        CultureInfo _language;
+        public CultureInfo Language
+        {
+            get { return _language; }
+        }
+
+        string _legal;
+        public string Legal
+        {
+            get { return _legal; }
+        }
+
+        DateTime _publicationDate;
+        public DateTime PublicationDate
+        {
+            get { return _publicationDate; }
+        }
+
+        string _publisher;
+        public string Publisher
+        {
+            get { return _publisher; }
+        }
+
+        string _title;
+        public string Title
+        {
+            get { return _title; }
+        }
+        #endregion From IBookMetaData
+
+        public Entry() { }
+
+        public Entry(EBook book)
+        {
+            _author = book.Author;
+            // TODO: copy the relevant data here.
+            //_cover = bookMetaData.Cover.SomeStuff;
+            _identifier = book.Identifier;
+            _language = (CultureInfo) (book.Language == null ? null : book.Language.Clone());
+            _legal = book.Legal;
+            _publicationDate = book.PublicationDate;
+            _publisher = book.Publisher;
+            _title = book.Title;
+            book.Entry = this;
         }
     }
 }
