@@ -39,11 +39,22 @@ namespace WinEbook
             return doc.ToString();
         }
 
+        private void UpdatePage()
+        {
+            EReaderView.Visibility = Windows.UI.Xaml.Visibility.Visible;
+            EReaderView.NavigateToString(Html());
+        }
+
         private void NextPage()
         {
             EReaderModel.CurrentBook.Entry.Offset += (int)WebViewBrushArea.ActualHeight;
-            EReaderView.Visibility = Windows.UI.Xaml.Visibility.Visible;
-            EReaderView.NavigateToString(Html());
+            UpdatePage();
+        }
+
+        private void PreviousPage()
+        {
+            EReaderModel.CurrentBook.Entry.Offset -= (int)WebViewBrushArea.ActualHeight;
+            UpdatePage();
         }
 
         /// <summary>
@@ -68,14 +79,24 @@ namespace WinEbook
             EReaderView.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
         }
 
+        private void Next_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            NextPage();
+        }
+
         private void WebViewBrushArea_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
             NextPage();
         }
 
-        private void Next_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void Previous_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-        	NextPage();
+        	PreviousPage();
+        }
+
+        private void WebViewBrushArea_DoubleTapped(object sender, Windows.UI.Xaml.Input.DoubleTappedRoutedEventArgs e)
+        {
+        	PreviousPage();
         }
     }
 }
