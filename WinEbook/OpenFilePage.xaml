@@ -150,7 +150,7 @@
             <Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>
             <TextBlock x:Name="pageTitle" Grid.Column="1" Text="{StaticResource AppName}" Style="{StaticResource PageHeaderTextStyle}"/>
         </Grid>
-        <TextBlock x:Name="textBlock" TextWrapping="Wrap" VerticalAlignment="Stretch" Style="{StaticResource PageSubheaderTextStyle}" Grid.Row="1" Grid.Column="6" Margin="0,0,0,10" Text="{Binding CurrentBook.Path, Mode=OneTime}" Padding="116,0,0,0">
+        <TextBlock x:Name="textBlock" TextWrapping="Wrap" VerticalAlignment="Stretch" Style="{StaticResource PageSubheaderTextStyle}" Grid.Row="1" Grid.Column="6" Margin="0,0,0,10" Text="{Binding CurrentBook.Path, Mode=OneWay}" Padding="116,0,0,0">
         	<TextBlock.RenderTransform>
         		<CompositeTransform/>
         	</TextBlock.RenderTransform>
