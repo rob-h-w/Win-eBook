@@ -21,16 +21,42 @@ namespace WinEbook.DataModel
             }
             set
             {
-                if (Contains(index))
+                if (null == index)
                 {
-                    _entriesByPath[index.Path] = value;
+                    // Ignore.
+                    return;
+                }
+
+                if (!Contains(index))
+                {
+                    _entriesByPath.Add(index.Path, value);
+                    EntryAdded(value);
+                    return;
+                }
+
+                Entry current = _entriesByPath[index.Path];
+                if (null == value)
+                {
+                    // Remove the entry.
+                    _entriesByPath.Remove(index.Path);
+                    EntryRemoved(current);
                 }
                 else
                 {
-                    _entriesByPath.Add(index.Path, value);
+                    if (!current.Equals(value))
+                    {
+                        // Update the entry.
+                        _entriesByPath[index.Path] = value;
+                        EntryChanged(value);
+                    }
                 }
             }
         }
+
+        public delegate void EntryHandler(Entry added);
+        public event EntryHandler EntryAdded;
+        public event EntryHandler EntryChanged;
+        public event EntryHandler EntryRemoved;
 
         public bool Contains(Entry entry)
         {
