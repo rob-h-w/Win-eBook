@@ -99,5 +99,75 @@ namespace WinEbook.DataModel
             _title = book.Title;
             book.Entry = this;
         }
+
+        public bool Equals(Entry other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (Chapter != other.Chapter)
+            {
+                return false;
+            }
+
+            if (Offset != other.Offset)
+            {
+                return false;
+            }
+
+            if (Path != other.Path)
+            {
+                return false;
+            }
+
+            if (Groups != other.Groups)
+            {
+                return false;
+            }
+
+            if (Author != other.Author)
+            {
+                return false;
+            }
+
+            //if (Cover != other.Cover)
+            //{
+            //    return false;
+            //}
+
+            if (Identifier != other.Identifier)
+            {
+                return false;
+            }
+
+            if (Language != other.Language)
+            {
+                return false;
+            }
+
+            if (Legal != other.Legal)
+            {
+                return false;
+            }
+
+            if (PublicationDate != other.PublicationDate)
+            {
+                return false;
+            }
+
+            if (Publisher != other.Publisher)
+            {
+                return false;
+            }
+
+            if (Title != other.Title)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }
