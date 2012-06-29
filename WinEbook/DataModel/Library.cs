@@ -53,7 +53,7 @@ namespace WinEbook.DataModel
             }
         }
 
-        public delegate void EntryHandler(Entry added);
+        public delegate void EntryHandler(Entry book);
         public event EntryHandler EntryAdded;
         public event EntryHandler EntryChanged;
         public event EntryHandler EntryRemoved;
