@@ -51,7 +51,7 @@ namespace TextData
 
         public string Title
         {
-            get { throw null; }
+            get { return null; }
         }
     }
 }
