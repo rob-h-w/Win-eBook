@@ -100,6 +100,39 @@ namespace WinEbook.DataModel
             book.Entry = this;
         }
 
+        static bool Equals<T>(T left, T right)
+        {
+            return left.Equals(right);
+        }
+
+        static bool Equals<T>(ObservableCollection<T> left, ObservableCollection<T> right)
+        {
+            if (left == null || right == null)
+            {
+                if (left == null && right == null)
+                {
+                    return true;
+                }
+
+                return false;
+            }
+
+            int count = left.Count;
+            if (count != right.Count)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < count; ++i)
+            {
+                if (!left[i].Equals(right[i]))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         public bool Equals(Entry other)
         {
             if (other == null)
@@ -122,7 +155,7 @@ namespace WinEbook.DataModel
                 return false;
             }
 
-            if (Groups != other.Groups)
+            if (!Equals<string>(Groups, other.Groups))
             {
                 return false;
             }
@@ -132,7 +165,7 @@ namespace WinEbook.DataModel
                 return false;
             }
 
-            //if (Cover != other.Cover)
+            //if (!Equals<Cover>(Cover, other.Cover))
             //{
             //    return false;
             //}
