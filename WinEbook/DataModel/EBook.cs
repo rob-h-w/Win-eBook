@@ -91,6 +91,28 @@ namespace WinEbook.DataModel
             set { SetProperty<Entry>(ref _entry, value, "Entry"); }
         }
 
+        /// <summary>
+        /// Ensure the loaded data is going to display something meaningful to the user.
+        /// </summary>
+        private void SanityCheck()
+        {
+            if (String.IsNullOrEmpty(Title))
+            {
+                // Set the title to the filename.
+                int index = -1;
+                const string fileSeparator = "\\";
+                if (Path.Contains(fileSeparator))
+                {
+                    index = Path.LastIndexOf(fileSeparator) + 1;
+
+                    if (Path.Length >= index)
+                    {
+                        Title = Path.Substring(index);
+                    }
+                }
+            }
+        }
+
         private void Copy(IBook other)
         {
             if (this == other)
@@ -106,6 +128,7 @@ namespace WinEbook.DataModel
             Legal = other.Legal;
             PublicationDate = other.PublicationDate;
             Publisher = other.Publisher;
+            Title = other.Title;
         }
 
         // Rob TODO: This should really be the result of querying the contents of a plugins folder.
@@ -134,6 +157,8 @@ namespace WinEbook.DataModel
             // The path doesn't need parsing.
             Path = item.Path;
             _entry = new Entry(this);
+
+            SanityCheck();
         }
 
         private EBook() : base() { }
