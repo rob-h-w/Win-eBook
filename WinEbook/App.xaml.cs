@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using WinEbook.DataModel;
 using System.Threading.Tasks;
+using Windows.UI.Popups;
 
 // The Grid App template is documented at http://go.microsoft.com/fwlink/?LinkId=234226
 
@@ -35,6 +36,29 @@ namespace WinEbook
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
+            // Observe the Library.
+            EReaderModel.Library.EntryAdded += Library_EntryAdded;
+            EReaderModel.Library.EntryChanged += Library_EntryChanged;
+            EReaderModel.Library.EntryRemoved += Library_EntryRemoved;
+        }
+
+        async void Library_EntryAdded(Entry book)
+        {
+            var messageDialog = new MessageDialog(String.Format("{0} was added to the Library", book.Title), "Book Added");
+            await messageDialog.ShowAsync();
+        }
+
+        async void Library_EntryChanged(Entry book)
+        {
+            var messageDialog = new MessageDialog(String.Format("{0} was updated in the Library", book.Title), "Book Updated");
+            await messageDialog.ShowAsync();
+        }
+
+        async void Library_EntryRemoved(Entry book)
+        {
+            var messageDialog = new MessageDialog(String.Format("{0} was removed from the Library", book.Title), "Book Removed");
+            await messageDialog.ShowAsync();
         }
 
         /// <summary>
